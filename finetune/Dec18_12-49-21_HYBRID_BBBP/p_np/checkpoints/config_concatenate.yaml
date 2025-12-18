@@ -1,0 +1,46 @@
+# -------------------------------------------------------------------
+# 기본 학습 파라미터
+# -------------------------------------------------------------------
+batch_size: 256
+epochs: 100
+eval_every_n_epochs: 1
+fine_tune_from: pretrained_gin      # MolCLR 사전 훈련 모델 폴더 이름 (./ckpt 내부)
+log_every_n_steps: 50
+fp16_precision: False
+weight_decay: 1e-6
+
+# --- 학습률 설정 ---
+init_lr: 0.0005                 # 새로 추가된 예측 헤드(Hybrid Head)의 학습률
+init_base_lr: 0.0001            # 기존 GNN 인코더(MolCLR 부분)의 학습률
+
+# -------------------------------------------------------------------
+# 태스크 및 모델 설정
+# -------------------------------------------------------------------
+gpu: 0                          # 사용할 GPU 번호
+task_name: BBBP              # 파인튜닝할 태스크 이름
+
+model_type: gin
+model: 
+  num_layer: 5
+  emb_dim: 300
+  feat_dim: 512
+  drop_ratio: 0.3
+  pool: mean
+
+# -------------------------------------------------------------------
+# 데이터셋 설정 (*** dataset_test.py에 완벽하게 맞춘 최종 버전 ***)
+# MolTestDatasetWrapper가 __init__에서 요구하는 모든 인자를 정의합니다.
+# -------------------------------------------------------------------
+dataset:
+  #smiles_field: 'smiles'
+  num_workers: 4                # dataloader number of workers
+  valid_size: 0.1               # ratio of validation data
+  test_size: 0.1                # ratio of test data
+  splitting: scaffold           # data splitting (i.e., random/scaffold)
+
+# -------------------------------------------------------------------
+# 하이브리드 모델을 위한 새로운 설정
+# -------------------------------------------------------------------
+hybrid_specific:
+  chemberta_model_name: "./ChemBERTa-77M-MLM"   
+  chemberta_lr: 1e-5

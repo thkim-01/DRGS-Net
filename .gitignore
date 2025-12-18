@@ -1,0 +1,6 @@
+*.bin
+data/pubchem-10m-clean.txt
+.pth
+.bin
+data/
+pycache/

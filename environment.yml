@@ -1,0 +1,27 @@
+name: drgsnet
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pytorch=1.8.1
+  - torchvision=0.9.1
+  - cudatoolkit=10.1
+  - rdkit=2020.09.1
+  - pip
+  - pip:
+    - transformers
+    - tensorboard
+    - scikit-learn
+    - pandas
+    - numpy
+    - tqdm
+    - pyyaml
+    # The PyG wheel selection is platform/torch-specific; include the high-level package
+    - torch-geometric==1.4.3
+    # The following low-level PyG extensions often require prebuilt wheels matching torch+cuda
+    - torch-scatter==2.0.5
+    - torch-sparse==0.6.9
+    - torch-cluster==1.5.9
+    - torch-spline-conv==1.2.1

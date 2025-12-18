@@ -1,0 +1,17 @@
+# Note: install a matching PyTorch + CUDA wheel first (see https://pytorch.org)
+# This requirements file intentionally excludes torch and rdkit because they are
+# best installed via conda to ensure binary compatibility (see environment.yml).
+
+transformers
+tensorboard
+scikit-learn
+pandas
+numpy
+tqdm
+pyyaml
+# If you want to try pip installation for PyG, include the following (may require matching wheels):
+# torch-geometric==1.4.3
+# torch-scatter==2.0.5
+# torch-sparse==0.6.9
+# torch-cluster==1.5.9
+# torch-spline-conv==1.2.1
